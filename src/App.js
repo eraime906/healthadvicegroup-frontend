@@ -1,5 +1,4 @@
 import './App.css';
-import NavbarComponent from "./components/NavbarComponent";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";

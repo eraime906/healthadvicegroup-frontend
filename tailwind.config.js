@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         'tile': ['monospace'],
       },
+      backgroundImage: {
+        'footer': "url('./assets/footer-background.png')",
+      }
     }
   },
   plugins: [],
