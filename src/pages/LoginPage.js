@@ -4,6 +4,7 @@ import FooterComponent from "../components/FooterComponent";
 import React, { useState } from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getIcon from "../utils/Icons";
+import {ACCOUNT_CREATION_ENDPOINT, post} from "../utils/HTTPRequestHandler";
 
 export default function LoginPage() {
 
@@ -21,6 +22,14 @@ export default function LoginPage() {
     function onSignupClick() {
         setWaitingFor("Signing Up...")
         setWaiting(true)
+        post(ACCOUNT_CREATION_ENDPOINT, {
+            username: username,
+            email: email,
+            password: password
+        }, (result) => {
+            setWaiting(false)
+            alert(result.data);
+        })
 
     }
 
@@ -43,7 +52,7 @@ export default function LoginPage() {
                                    id="username"
                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    onChange={(event) => setUsername(event.target.value)}
-                                   placeholder="JohnSmith26" required/>
+                                   placeholder="TheLegend27" required/>
                         </div>
                         {/* Email input */}
                         <div>
