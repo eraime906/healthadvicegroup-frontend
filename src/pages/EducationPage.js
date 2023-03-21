@@ -32,7 +32,7 @@ export default function EducationPage() {
             <div className={"pt-8 pl-24 pr-24 w-full flex gap-8"}>
                 {/* Articles filter / control panel */}
                 <div className={"w-1/4 flex flex-col gap-2"}>
-                    <p1 className={"flex justify-start font-mono font-bold text-2xl mb-2"}>Options</p1>
+                    <h1 className={"flex justify-start font-mono font-bold text-2xl mb-2"}>Options</h1>
                     <SwitchComponent
                         description={"Filter Weather Articles"}
                         state={filterWeatherArticles}
@@ -55,7 +55,7 @@ export default function EducationPage() {
                     {!loaded &&
                         <div className={"flex w-full items-center gap-2"}>
                             <FontAwesomeIcon icon={getIcon("loader")} className="animate-spin"/>
-                            <p1>Loading Articles...</p1>
+                            <h1>Loading Articles...</h1>
                         </div>
                     }
                     {/* If the articles have loaded then display the articles */}

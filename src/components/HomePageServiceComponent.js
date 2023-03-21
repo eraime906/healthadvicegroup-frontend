@@ -10,7 +10,7 @@ export default function HomePageServiceComponent(props) {
                 className={"w-12 h-12 m-2 mt-5"}
                 icon={getIcon(props.icon)}
             />
-            <p1 className={"font-bold text-2xl font-mono mb-3"}>{props.title}</p1>
+            <h1 className={"font-bold text-2xl font-mono mb-3"}>{props.title}</h1>
             <text className={"font-sans text-center ml-2 mr-2"}>{props.text}</text>
             <button
                 className={"mt-auto mb-4 text-blue-600 underline hover:font-bold"}

@@ -1,35 +1,151 @@
 import NavbarComponent from "../components/NavbarComponent";
 import BannerComponent from "../components/BannerComponent";
 import FooterComponent from "../components/FooterComponent";
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getIcon from "../utils/Icons";
-import {ACCOUNT_CREATION_ENDPOINT, post} from "../utils/HTTPRequestHandler";
+import {
+    ACCOUNT_CREATION_ENDPOINT,
+    CREDENTIALS_VALIDITY_ENDPOINT,
+    head,
+    post,
+    USERNAME_VALIDITY_ENDPOINT
+} from "../utils/HTTPRequestHandler";
+import {AxiosError} from "axios";
 
 export default function LoginPage() {
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [feedback, setFeedback] = useState(null);
     const [waiting, setWaiting] = useState(false);
     const [waitingFor, setWaitingFor] = useState("")
 
-    function onLoginClick() {
-        setWaitingFor("Logging in...")
-        setWaiting(true)
+    /**
+     * @returns whether {@link #username} is taken or not
+     */
+    async function doesUsernameExist() {
+        let exists;
+        await head(USERNAME_VALIDITY_ENDPOINT + username, null,
+            response => {
+                exists = response.status === 204;
+            },
+            error => {
+                exists = false;
+            });
+        return exists;
     }
 
-    function onSignupClick() {
+    /***
+     * @returns whether {@link #email} is valid
+     */
+    function isEmailValid() {
+        return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
+    }
+
+    /**
+     * @returns whether {@link #password} is considered 'strong'
+     */
+    function isPasswordStrong() {
+        if (password.length < 8) {
+            return false;
+        }
+        let hasUppercase = false;
+        let hasSpecial = false;
+        // iterate over password and check strength
+        for (let i = 0; i < password.length; i++) {
+            let character = password[i];
+            if (character.toUpperCase() === character) {
+                hasUppercase = true;
+            }
+            if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(character)) {
+                hasSpecial = true;
+            }
+        }
+        return hasUppercase && hasSpecial;
+    }
+
+    /**
+     * Returns whether an account with the provided {@link #username} & {@link #email} exists,
+     * and if so whether {@link #password} is correct for it.
+     */
+    async function checkLoginCredentials() {
+        if (!await doesUsernameExist()) {
+            setWaiting(false);
+            setFeedback("No account with that username exists!");
+            return;
+        }
+        // Validate credentials
+        await post(CREDENTIALS_VALIDITY_ENDPOINT, [
+                {
+                    email: email,
+                    password: password
+                }
+            ],
+            response => {
+                if (response.status === 204) {
+                    setWaiting(false);
+                    setFeedback("Logged in!")
+                    return true;
+                }
+            },
+            error => {
+                setWaiting(false);
+                setFeedback(error.response.data)
+                return false;
+            })
+    }
+
+    async function onLoginClick() {
+        setWaitingFor("Logging in...")
+        setWaiting(true)
+        if (!await checkLoginCredentials()) {
+            setWaiting(false);
+            return;
+        }
+        alert("valid="+(await checkLoginCredentials()))
+    }
+
+    async function onSignupClick() {
         setWaitingFor("Signing Up...")
         setWaiting(true)
-        post(ACCOUNT_CREATION_ENDPOINT, {
-            username: username,
-            email: email,
-            password: password
-        }, (result) => {
-            setWaiting(false)
-            alert(result.data);
-        })
+        // Is the provided email valid?
+        if (!isEmailValid()) {
+            setWaiting(false);
+            setFeedback("Invalid email provided, please double check it!");
+            return;
+        }
+        // Is the provided password 'strong'?
+        if (!isPasswordStrong()) {
+            setWaiting(false);
+            setFeedback("Your password must have at least one special character, one uppercase character and be at least 8 characters long!")
+            return;
+        }
+        // Does the provided username already exist?
+        if (await doesUsernameExist()) {
+            setWaiting(false);
+            setFeedback("An account with that username already exists!");
+            return;
+        }
+        await post(ACCOUNT_CREATION_ENDPOINT,
+            [
+                {
+                    username: username,
+                    email: email,
+                    password: password
+                }
+            ],
+            result => {
+                if (result.status === 204) {
+                    setWaiting(false);
+                    setFeedback("Account created! Please login...")
+                }
+            },
+            error => {
+                setWaiting(false);
+                setFeedback(error.response.data)
+            })
 
     }
 
@@ -97,11 +213,16 @@ export default function LoginPage() {
                         {/* Conditionally render a loading icon with text if we're waiting for a response from the backend */}
                         {waiting &&
                             <div className={"mt-4 ml-2"}>
-                                <FontAwesomeIcon icon={getIcon("loader")} className="animate-spin" />
+                                <FontAwesomeIcon icon={getIcon("loader")} className="animate-spin"/>
                                 {" " + waitingFor}
                             </div>
                         }
                     </div>
+                    {feedback != null &&
+                        <div className={"mt-4 ml-2 font-mono"}>
+                            {feedback}
+                        </div>
+                    }
                 </div>
                 <div className={"w-7/12 bg-emerald-900"}>
                     2

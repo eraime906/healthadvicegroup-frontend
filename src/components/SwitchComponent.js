@@ -12,7 +12,7 @@ import {Switch} from "@headlessui/react";
 export default function SwitchComponent(props) {
     return (
         <div className={"flex"}>
-            <p1 className={"mr-2 font-mono"}>{props.description}</p1>
+            <h1 className={"mr-2 font-mono"}>{props.description}</h1>
             <Switch
                 checked={props.state}
                 onChange={props.setState}
