@@ -2,10 +2,22 @@ import NavbarComponent from "../components/NavbarComponent";
 import BannerComponent from "../components/BannerComponent"
 import HomePageServiceComponent from "../components/HomePageServiceComponent";
 import FooterComponent from "../components/FooterComponent";
+import {CookieConsent} from "react-cookie-consent";
 
 export default function HomePage() {
     return (
         <div>
+            <CookieConsent
+                location="bottom"
+                buttonText="I Accept"
+                cookieName="cookieConsent"
+                style={{ background: "#2B373B" }}
+                buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+                expires={150}
+            >
+                Health Advice Group uses cookies to enhance user experience.{" "}
+                <span style={{ fontSize: "10px" }}>No personal data will be collected or redistributed.</span>
+            </CookieConsent>
             <NavbarComponent />
             <BannerComponent src={"home-banner.jpg"} alt={"Picture of a forest floor"}/>
             {/* Our Services Title*/}
