@@ -4,6 +4,7 @@ import FooterComponent from "../components/FooterComponent";
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import getIcon from "../utils/Icons";
+import Cookies from 'universal-cookie';
 import {
     ACCOUNT_CREATION_ENDPOINT,
     CREDENTIALS_VALIDITY_ENDPOINT,
@@ -15,27 +16,16 @@ import {AxiosError} from "axios";
 
 export default function LoginPage() {
 
+    // Cookie integration
+    const cookies = new Cookies();
+
+    // React States
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [feedback, setFeedback] = useState(null);
     const [waiting, setWaiting] = useState(false);
     const [waitingFor, setWaitingFor] = useState("")
-
-    /**
-     * @returns whether {@link #username} is taken or not
-     */
-    async function doesUsernameExist() {
-        let exists;
-        await head(USERNAME_VALIDITY_ENDPOINT + username, null,
-            response => {
-                exists = response.status === 204;
-            },
-            error => {
-                exists = false;
-            });
-        return exists;
-    }
 
     /***
      * @returns whether {@link #email} is valid
@@ -67,18 +57,35 @@ export default function LoginPage() {
     }
 
     /**
+     * @returns whether {@link #username} is taken or not
+     */
+    async function doesUsernameExist() {
+        let exists;
+        await head(USERNAME_VALIDITY_ENDPOINT + username, null,
+            response => {
+                exists = response.status === 204;
+            },
+            error => {
+                exists = false;
+            });
+        return exists;
+    }
+
+    /**
      * Returns whether an account with the provided {@link #username} & {@link #email} exists,
      * and if so whether {@link #password} is correct for it.
      */
     async function checkLoginCredentials() {
+        let valid;
         if (!await doesUsernameExist()) {
             setWaiting(false);
             setFeedback("No account with that username exists!");
-            return;
+            return false;
         }
         // Validate credentials
         await post(CREDENTIALS_VALIDITY_ENDPOINT, [
                 {
+                    username: username,
                     email: email,
                     password: password
                 }
@@ -86,25 +93,25 @@ export default function LoginPage() {
             response => {
                 if (response.status === 204) {
                     setWaiting(false);
-                    setFeedback("Logged in!")
-                    return true;
+                    valid = true;
                 }
             },
             error => {
                 setWaiting(false);
                 setFeedback(error.response.data)
-                return false;
-            })
+                valid = false;
+            });
+        return valid;
     }
 
     async function onLoginClick() {
         setWaitingFor("Logging in...")
         setWaiting(true)
-        if (!await checkLoginCredentials()) {
-            setWaiting(false);
-            return;
+        if (await checkLoginCredentials()) {
+            cookies.set("logged-in", true, {path: "/"});
+            cookies.set("logged-user", username, {path: "/"});
+            setFeedback("Logged in!")
         }
-        alert("valid="+(await checkLoginCredentials()))
     }
 
     async function onSignupClick() {

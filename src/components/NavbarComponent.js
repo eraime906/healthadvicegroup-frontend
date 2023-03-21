@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import Cookies from 'universal-cookie';
 
 /**
  * A component representing the navigation bar placed at the top of each page
@@ -9,6 +10,14 @@ import {useState} from "react";
  * @returns {JSX.Element}
  */
 export default function NavbarComponent() {
+
+    // Cookie integration
+    const cookies = new Cookies();
+    for (let i = 0; i < cookies.getAll().length; i++) {
+        console.log(`cookie '${cookies.getAll()[i]}': '${cookies.get(cookies.getAll()[i])}'`)
+    }
+
+    // React States
     const navigate = useNavigate();
     const [expanded, setExpanded] = useState(false);
 
