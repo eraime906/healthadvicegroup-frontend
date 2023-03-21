@@ -12,10 +12,6 @@ import {getLoggedInUsername, isLoggedIn} from '../utils/CookieHandler'
  */
 export default function NavbarComponent() {
 
-    // Cookie integration
-    const cookies = new Cookies();
-    console.log(`logged-in='${isLoggedIn()}', loggedInUser='${getLoggedInUsername()}'`)
-
     // React States
     const navigate = useNavigate();
     const [expanded, setExpanded] = useState(false);

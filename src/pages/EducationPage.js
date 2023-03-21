@@ -14,12 +14,15 @@ export default function EducationPage() {
     const [onlyFavouriteArticles, setOnlyFavouriteArticles] = useState(false);
     const [loaded, setLoaded] = useState(false);
 
-    get(ARTICLES_ENDPOINT, {}, (response) => {
-        console.log(JSON.stringify(response.data))
-
-        // when stuffs done
-        setLoaded(true)
-    })
+    get(ARTICLES_ENDPOINT, {},
+        response => {
+            // when stuffs done
+            Object.keys(response.data).forEach(key => {
+                new Article(JSON.parse(response.data[key]))
+            })
+            setLoaded(true)
+        },
+        error => {console.log(error)})
 
     return (
         <>

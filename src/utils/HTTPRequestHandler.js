@@ -11,7 +11,9 @@ export const LOCATION_DATA_ENDPOINT = ADDRESS + "location/"
 axios.defaults.headers.common["Accept"] = "application/json";
 
 export async function get(url, params, callback, error) {
-    await axios.get(url).then(result => callback(result)).catch(err => error(err))
+    await axios.get(url)
+        .then(result => callback(result))
+        .catch(err => error(err))
 }
 
 export async function post(url, data, callback, error) {
@@ -19,9 +21,13 @@ export async function post(url, data, callback, error) {
         method: 'post',
         url: url,
         data: data
-    }).then(result => callback(result)).catch(err => error(err))
+    })
+        .then(result => callback(result))
+        .catch(err => error(err))
 }
 
 export async function head(url, data, callback, error) {
-    await axios.head(url, data).then(result => callback(result)).catch(err => error(err))
+    await axios.head(url, data)
+        .then(result => callback(result))
+        .catch(err => error(err))
 }

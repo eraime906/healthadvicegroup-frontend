@@ -16,9 +16,6 @@ import {setGlobalCookie} from "../utils/CookieHandler";
 
 export default function LoginPage() {
 
-    // Cookie integration
-    const cookies = new Cookies();
-
     // React States
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
