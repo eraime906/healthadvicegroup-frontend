@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import Cookies from 'universal-cookie';
+import {getLoggedInUsername, isLoggedIn} from '../utils/CookieHandler'
 
 /**
  * A component representing the navigation bar placed at the top of each page
@@ -13,9 +14,7 @@ export default function NavbarComponent() {
 
     // Cookie integration
     const cookies = new Cookies();
-    for (let i = 0; i < cookies.getAll().length; i++) {
-        console.log(`cookie '${cookies.getAll()[i]}': '${cookies.get(cookies.getAll()[i])}'`)
-    }
+    console.log(`logged-in='${isLoggedIn()}', loggedInUser='${getLoggedInUsername()}'`)
 
     // React States
     const navigate = useNavigate();

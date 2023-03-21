@@ -12,7 +12,7 @@ import {
     post,
     USERNAME_VALIDITY_ENDPOINT
 } from "../utils/HTTPRequestHandler";
-import {AxiosError} from "axios";
+import {setGlobalCookie} from "../utils/CookieHandler";
 
 export default function LoginPage() {
 
@@ -108,8 +108,8 @@ export default function LoginPage() {
         setWaitingFor("Logging in...")
         setWaiting(true)
         if (await checkLoginCredentials()) {
-            cookies.set("logged-in", true, {path: "/"});
-            cookies.set("logged-user", username, {path: "/"});
+            setGlobalCookie("logged-in", true);
+            setGlobalCookie("logged-user", username);
             setFeedback("Logged in!")
         }
     }
