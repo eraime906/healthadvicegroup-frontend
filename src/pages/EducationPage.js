@@ -7,6 +7,8 @@ import getIcon from "../utils/Icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ARTICLES_ENDPOINT, get} from "../utils/HTTPRequestHandler";
 
+const loadedArticles = [];
+
 export default function EducationPage() {
 
     const [filterWeatherArticles, setFilterWeatherArticles] = useState(false);
@@ -16,9 +18,11 @@ export default function EducationPage() {
 
     get(ARTICLES_ENDPOINT, {},
         response => {
+        console.log("fetching articles")
             // when stuffs done
             Object.keys(response.data).forEach(key => {
-                new Article(JSON.parse(response.data[key]))
+                // Don't load articles that are already loaded
+                loadedArticles.push(new Article(JSON.parse(response.data[key])));
             })
             setLoaded(true)
         },
