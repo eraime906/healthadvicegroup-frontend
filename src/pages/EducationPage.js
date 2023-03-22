@@ -41,12 +41,13 @@ export default function EducationPage() {
 
     /**
      * @param article the article
+     *
      * @returns {boolean} whether the provided article is filtered out or not
      */
     function isArticleFilteredOut(article) {
         return (filterEnvironmentalArticles && article.hasTag("ENVIRONMENTAL"))
-            || (filterAirQualityArticles && article.hasTag("AIR_QUALITY"))
-            || (onlyFavouriteArticles && article.hasTag("ADVICE"));
+            || (filterAirQualityArticles && article.hasTag("AIR_QUALITY"));
+        // TODO: impl favourite article filtering?
     }
     
     return (
