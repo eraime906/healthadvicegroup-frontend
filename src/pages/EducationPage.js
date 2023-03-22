@@ -194,7 +194,7 @@ function ArticleComponent(props) {
             </div>
             <Dialog
                 open={open}
-                onClose={() => setOpen(false)}>
+                onClose={() => null}>
                 <div className={"fixed inset-0 flex items-center justify-center p-4"}>
                     <Dialog.Panel className={"flex flex-col w-full max-w-sm rounded bg-white border-2 border-black w-96 h-96 align-middle"}>
                         <Dialog.Title className={"text-xl font-mono font-bold m-2"}>{article.title}</Dialog.Title>
