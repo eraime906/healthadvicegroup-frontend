@@ -1,10 +1,11 @@
 import NavbarComponent from "../components/NavbarComponent";
+import FooterComponent from "../components/FooterComponent";
 
 export default function RiskPage() {
     return (
         <>
             <NavbarComponent />
-            this is the risk page
+            <FooterComponent />
         </>
     )
 }
