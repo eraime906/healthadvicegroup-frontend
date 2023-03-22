@@ -18,7 +18,7 @@ export default function FooterComponent() {
     return (
         <div className={"flex flex-col w-full mt-10 bg-gradient-to-r from-slate-800 to-slate-900"}>
             <div>
-                <text className={"flex text-neutral-400 mt-8 ml-12 mb-2 font-mono text-lg"}>© Health Advice Group</text>
+                <p className={"flex text-neutral-400 mt-8 ml-12 mb-2 font-mono text-lg"}>© Health Advice Group</p>
             </div>
             <div className={"flex justify-center ml-12 mr-12 mb-8 grid grid-rows-4 grid-cols-1 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-1"}>
                 {/* Site map */}
@@ -88,7 +88,7 @@ function ContactUsComponent(props) {
     return (
         <div className={"flex items-center break-words mt-2"}>
             <FontAwesomeIcon icon={getIcon(props.icon)} inverse />
-            <text className={"ml-2 text-white text-l font-mono hover:font-bold"}>{props.contact}</text>
+            <p className={"ml-2 text-white text-l font-mono hover:font-bold"}>{props.contact}</p>
         </div>
     )
 }

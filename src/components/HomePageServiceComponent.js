@@ -11,11 +11,12 @@ export default function HomePageServiceComponent(props) {
                 icon={getIcon(props.icon)}
             />
             <h1 className={"font-bold text-2xl font-mono mb-3"}>{props.title}</h1>
-            <text className={"font-sans text-center ml-2 mr-2"}>{props.text}</text>
+            <p className={"font-sans text-center ml-2 mr-2"}>{props.text}</p>
             <button
                 className={"mt-auto mb-4 text-blue-600 underline hover:font-bold"}
                 onClick={() => {navigate("/" + props.destination)}}>
-                Learn more</button>
+                Learn more
+            </button>
         </div>
     )
 }
