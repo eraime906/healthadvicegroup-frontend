@@ -91,7 +91,7 @@ function DropdownComponent() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="gap-1 flex flex-col justify-start absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="gap-1 flex flex-col justify-start absolute right-0 w-56 mt-2 p-4 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <DropdownButton
                         text={"Education"}
                         icon={"graduation-cap"}
@@ -137,8 +137,8 @@ function DropdownButton(props) {
             className={"items-center"}
             onClick={props.onClick}
         >
-            <FontAwesomeIcon className={"w-4 h-4 ml-1 mr-1"} icon={getIcon(props.icon)}/>
-            <button className={"text-left"}>
+            <FontAwesomeIcon className={"w-4 h-4 ml-2 mr-2 mt-2"} icon={getIcon(props.icon)}/>
+            <button className={"text-left hover:text-bold hover:underline"}>
                 {props.text}
             </button>
         </div>

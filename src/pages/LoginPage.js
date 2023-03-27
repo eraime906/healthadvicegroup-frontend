@@ -158,7 +158,7 @@ export default function LoginPage() {
             <NavbarComponent/>
             <BannerComponent src={"login-banner.jpg"} alt={"Picture of a forest track in the morning"}/>
             {/* Login screen main section */}
-            <div className={"pt-8 pl-24 pr-24 w-full flex gap-8"}>
+            <div className={"pt-8 pl-4 pr-4 lg:pl-24 lg:pr-24 w-full flex gap-8"}>
                 <div className={"w-5/12"}>
                     <form className={"grid gap-4"}>
                         {/* Username input */}
@@ -203,7 +203,7 @@ export default function LoginPage() {
                         </div>
                     </form>
                     {/* Login & Register */}
-                    <div className={"flex items-center"}>
+                    <div className={"flex flex-col sm:flex-row items-center"}>
                         <button
                             className="mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
                             onClick={() => onLoginClick()}>
@@ -229,8 +229,8 @@ export default function LoginPage() {
                     }
                 </div>
                 <div className={"w-7/12"}>
-                    <h1 className={"mt-12 ml-24 w-full font-bold font-mono text-xl"}>Member Benefits</h1>
-                    <ul className={"ml-24 list-disc font-mono mt-2"}>
+                    <h1 className={"mt-4 ml-4 lg:mt-12 lg:ml-24 w-full font-bold font-mono text-xl"}>Member Benefits</h1>
+                    <ul className={"mt-4 ml-4 lg:ml-24 list-disc font-mono mt-2"}>
                         <li>Access to exclusive, member-only content</li>
                         <li>Ability to save & favourite articles</li>
                         <li>Access to our unique personal health tracker</li>
