@@ -228,8 +228,14 @@ export default function LoginPage() {
                         </div>
                     }
                 </div>
-                <div className={"w-7/12 bg-emerald-900"}>
-                    2
+                <div className={"w-7/12"}>
+                    <h1 className={"mt-12 ml-24 w-full font-bold font-mono text-xl"}>Member Benefits</h1>
+                    <ul className={"ml-24 list-disc font-mono mt-2"}>
+                        <li>Access to exclusive, member-only content</li>
+                        <li>Ability to save & favourite articles</li>
+                        <li>Access to our unique personal health tracker</li>
+                        <li>Ability to create customisable risk assessments</li>
+                    </ul>
                 </div>
             </div>
             <FooterComponent/>
