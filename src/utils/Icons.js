@@ -10,6 +10,7 @@ import {
     faSpinner,
     faHeart,
     faTag,
+    faUser, faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
@@ -28,7 +29,9 @@ const icons = {
     'loader': faSpinner,
     'heart-solid': faHeart,
     'heart-empty': regular("heart"),
-    "tag": faTag
+    "tag": faTag,
+    "user": faUser,
+    "bars": faBars
 }
 
 /**

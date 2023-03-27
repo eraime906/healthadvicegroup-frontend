@@ -1,13 +1,12 @@
 import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
-
 /**
  * @param cookie the cookie key
  *
  * @returns the value of the provided cookie
  */
 export function getCookie(cookie) {
+    const cookies = new Cookies();
     return cookies.get(cookie);
 }
 
@@ -17,7 +16,7 @@ export function getCookie(cookie) {
  * @returns the value of the provided cookie as a boolean
  */
 export function getCookieAsBoolean(cookie) {
-    return Boolean(getCookie(cookie));
+    return getCookie(cookie) === 'true';
 }
 
 /**
@@ -27,6 +26,7 @@ export function getCookieAsBoolean(cookie) {
  * @param value the value of the cookie
  */
 export function setCookie(name, value) {
+    const cookies = new Cookies();
     cookies.set(name, value);
 }
 
@@ -38,6 +38,7 @@ export function setCookie(name, value) {
  * @param options the options
  */
 export function setCookieWithData(name, value, options) {
+    const cookies = new Cookies();
     cookies.set(name, value, options);
 }
 
@@ -48,7 +49,7 @@ export function setCookieWithData(name, value, options) {
  * @param value the value of the cookie
  */
 export function setGlobalCookie(name, value) {
-    setCookieWithData(name, value, {path: "/"})
+    setCookieWithData(name, value, {path: '/'})
 }
 
 /**
