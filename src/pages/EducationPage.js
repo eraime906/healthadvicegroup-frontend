@@ -61,9 +61,9 @@ export default function EducationPage() {
             </div>
 
             {/* Articles div */}
-            <div className={"pt-8 pl-24 pr-24 w-full flex gap-8"}>
+            <div className={"pt-8 pl-24 pr-24 w-full flex gap-8 flex-col xl:flex-row"}>
                 {/* Articles filter / control panel */}
-                <div className={"w-1/4 flex flex-col gap-2"}>
+                <div className={"w-full xl:w-1/4 flex flex-col gap-2"}>
                     <h1 className={"flex justify-start font-mono font-bold text-2xl mb-2"}>Options</h1>
                     <SwitchComponent
                         description={"No Environment Articles"}
@@ -82,7 +82,7 @@ export default function EducationPage() {
                     />
                 </div>
                 {/* Articles display */}
-                <div className={"w-3/4"}>
+                <div className={"w-full xl:w-3/4"}>
                     {/* If the articles are loading display a spinner */}
                     {!loaded &&
                         <div className={"flex w-full items-center gap-2"}>
@@ -186,10 +186,6 @@ function ArticleComponent(props) {
                         <FontAwesomeIcon className={"mb-1 mr-1"} icon={getIcon("tag")}/>
                         {article.formatTags()}
                     </div>
-                </div>
-                {/* Filler div */}
-                <div className={"flex w-2/4"}></div>
-                <div className={"flex w-1/4"}>
                 </div>
             </div>
             <Dialog
