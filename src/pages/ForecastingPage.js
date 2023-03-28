@@ -225,7 +225,7 @@ function WeatherLocationComponent(props) {
                 }}>
                 <div className={"flex flex-col w-full h-48"}>
                     <div className={"w-full flex flex-col md:flex-row text-center"}>
-                        <h1 className={"text-xl font-mono font-bold"}>{name}</h1>
+                        <h1 className={"ml-2 text-xl font-mono font-bold"}>{name}</h1>
                         <h1 className={"truncate whitespace-pre-wrap"}>{" - " + location.getDescription()}</h1>
                     </div>
                     <h1 className={"ml-2 mb-1 truncate"}>{location.getTemperatureStatus()}</h1>
