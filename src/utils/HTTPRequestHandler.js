@@ -7,6 +7,7 @@ export const ACCOUNT_CREATION_ENDPOINT = ADDRESS + "account/create"
 export const ARTICLES_ENDPOINT = ADDRESS + "articles"
 export const LOCATIONS_ENDPOINT = ADDRESS + "locations"
 export const LOCATION_DATA_ENDPOINT = ADDRESS + "location/"
+export const CUSTOM_LOCATION = ADDRESS + "locationdata/"
 
 axios.defaults.headers.common["Accept"] = "application/json";
 
