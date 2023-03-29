@@ -15,6 +15,9 @@ export default function RiskPage() {
                     longer than you have to, make use of our FREE template and carry out a risk assessment
                     on your home environment today!
                 </p>
+                <p className={"text-base mb-4"}>
+                    Learn more about Risk Assessments by reading our Risk Assessment article on the Education page!
+                </p>
                 <p1 className={"font-bold"}>Risk Assessment FAQ</p1>
                 <ul className={"list-decimal ml-12 gap-y-5"}>
                     <li className={"mt-2"}>Why should I carry out a Risk Assessment?</li>

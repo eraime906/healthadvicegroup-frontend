@@ -58,6 +58,7 @@ export default function EducationPage() {
             <div className={"flex flex-col w-full font-mono font-bold flex items-center justify-center mt-5 mb-2 text-4xl"} >
                 <h1>Our Articles</h1>
                 <h1 className={"text-sm italic mt-2"}>Click any article to read it!</h1>
+                <p className={"text-sm text-center"}>Please note that these articles are meant for advisory purposes, please consult a trained professional before employing any advice suggested here.</p>
             </div>
 
             {/* Articles div */}
@@ -138,7 +139,8 @@ class Article {
                 tags += tagName += ", "
             }
         })
-        return tags.substring(0, tags.length - 2);
+        tags = tags.substring(0, tags.length - 2);
+        return tags.replace("_", "");
     }
 
     /**
@@ -194,7 +196,7 @@ function ArticleComponent(props) {
                 <div className={"fixed inset-0 flex items-center justify-center p-4"}>
                     <Dialog.Panel className={"flex flex-col w-full max-w-sm rounded bg-white border-2 border-black w-96 h-96 align-middle"}>
                         <Dialog.Title className={"text-xl font-mono font-bold m-2"}>{article.title}</Dialog.Title>
-                        <p className={"text-center overflow-y-auto mt-4 mb-4"}>
+                        <p className={"text-center overflow-y-auto m-4"}>
                             {article.text}
                         </p>
                         <button

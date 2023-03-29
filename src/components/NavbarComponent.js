@@ -23,7 +23,6 @@ export default function NavbarComponent() {
     // React States
     const navigate = useNavigate();
     const [reload, setReload] = useState(false);
-    const [expanded, setExpanded] = useState(false);
 
     function onClick(destination) {
         navigate("/" + destination)
@@ -45,12 +44,7 @@ export default function NavbarComponent() {
             </div>
             {/*Drop-down for small screens*/}
             <div className={"visible xl:hidden w-9/12 flex justify-end pr-8"}>
-                {!expanded && <FontAwesomeIcon
-                    className={"w-10 h-10"}
-                    icon={getIcon("bars")}
-                    onClick={() => setExpanded(true)}
-                />}
-                {expanded && <DropdownComponent/>}
+                <DropdownComponent />
             </div>
             {/* Desktop view*/}
             <div className={"hidden xl:visible xl:w-9/12 xl:flex justify-end mr-12 text-blue-800"}>
