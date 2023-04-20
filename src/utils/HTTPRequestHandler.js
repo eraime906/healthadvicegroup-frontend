@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ADDRESS = "http://localhost:4567/";
+const ADDRESS = "http://162.55.91.133:4567/";
 export const USERNAME_VALIDITY_ENDPOINT = ADDRESS + "account/"
 export const CREDENTIALS_VALIDITY_ENDPOINT = ADDRESS + "account/validate"
 export const ACCOUNT_CREATION_ENDPOINT = ADDRESS + "account/create"
